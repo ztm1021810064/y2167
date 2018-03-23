@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.dao.NewsDao">
+    <resultMap id="newsMapper" type="News">
+        <id column="newId" property="newId"></id>
+        <result column="newsTitle" property="newsTitle"></result>
+        <collection property="list" ofType="Talks" select="selectTalk" column="newId">
+        </collection>
+    </resultMap>
+
+    <select id="selectTalk" resultType="Talks">
+        SELECT * FROM talk WHERE nid = #{newId}
+    </select>
+
+
+    <select id="findByPage" resultMap="newsMapper">
+            select * from news limit #{beginIndex},#{everyPage}
+    </select>
+
+
+    <select id="getCount" resultType="int">
+        select count(*) from news
+    </select>
+
+    <update id="update">
+      UPDATE news SET clickCount=clickCount+1 WHERE newId = #{newId}
+    </update>
+
+    <select id="news" resultType="News">
+        SELECT * FROM news WHERE newId=#{0}
+    </select>
+</mapper>

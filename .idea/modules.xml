@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/01MyBatis/01MyBatis.iml" filepath="$PROJECT_DIR$/01MyBatis/01MyBatis.iml" />
+      <module fileurl="file://$PROJECT_DIR$/02MyBatis/02MyBatis.iml" filepath="$PROJECT_DIR$/02MyBatis/02MyBatis.iml" />
+      <module fileurl="file://$PROJECT_DIR$/03Shopp/03Shopp.iml" filepath="$PROJECT_DIR$/03Shopp/03Shopp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/05Spring/05Spring.iml" filepath="$PROJECT_DIR$/05Spring/05Spring.iml" />
+      <module fileurl="file://$PROJECT_DIR$/06SpringMVC/06SpringMVC.iml" filepath="$PROJECT_DIR$/06SpringMVC/06SpringMVC.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Dom4j/Dom4j.iml" filepath="$PROJECT_DIR$/Dom4j/Dom4j.iml" />
+      <module fileurl="file://$PROJECT_DIR$/HomeWork/HomeWork.iml" filepath="$PROJECT_DIR$/HomeWork/HomeWork.iml" />
+      <module fileurl="file://$PROJECT_DIR$/News/News.iml" filepath="$PROJECT_DIR$/News/News.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Y2167.iml" filepath="$PROJECT_DIR$/Y2167.iml" />
+    </modules>
+  </component>
+</project>

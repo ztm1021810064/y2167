@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="01MyBatis" />
+        <module name="02MyBatis" />
+        <module name="03Shopp" />
+        <module name="05Spring" />
+        <module name="06SpringMVC" />
+        <module name="Dom4j" />
+        <module name="HomeWork" />
+        <module name="News" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="01MyBatis" target="1.5" />
+      <module name="02EaxmSystem" target="1.5" />
+      <module name="02MyBatis" target="1.5" />
+      <module name="03ExamSystem" target="1.5" />
+      <module name="03Shopp" target="1.5" />
+      <module name="04MyBatis" target="1.5" />
+      <module name="04Spring" target="1.5" />
+      <module name="05Spring" target="1.5" />
+      <module name="06SpringMVC" target="1.5" />
+      <module name="Dom4j" target="1.5" />
+      <module name="HomeWork" target="1.5" />
+      <module name="News" target="1.5" />
+      <module name="Y2167" target="1.5" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

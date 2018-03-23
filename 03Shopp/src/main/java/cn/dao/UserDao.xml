@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.dao.UserDao">
+      <select id="login" resultType="int">
+          SELECT count(*) AS num FROM `smbms_user` WHERE userName=#{0} AND userPassword=#{1}
+      </select>
+    <select id="user" resultType="User">
+        SELECT * FROM `smbms_user` WHERE userName=#{0}
+    </select>
+    <select id="oldPassword" resultType="User">
+        SELECT * FROM `smbms_user` WHERE userCode=#{0}
+    </select>
+</mapper>

@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--命名空间-->
+<mapper namespace="cn.happy.dao.IBookDAO">
+
+    <cache/>
+     <sql id="myid">
+         bookid,bookname,bookauthor,bookprice
+     </sql>
+
+    <!--resultMap-->
+    <resultMap id="bookMapper" type="Book">
+        <id column="bookId" property="bookID"></id>
+     <!--   <result column="bookName" property="bookName"></result>-->
+    </resultMap>
+
+    <!---->
+    <select id="findAllBooks"  resultMap="bookMapper">
+        select <include refid="myid"></include> from book
+    </select>
+    <!--2.添加操作-->
+    <insert id="addBook">
+        insert into book(bookname,bookauthor,bookprice) values(#{bookName},#{bookAuthor},#{bookPrice})
+    </insert>
+
+    <!--del-->
+    <delete id="delBook">
+        delete from book where bookid=#{bookID}
+    </delete>
+
+    <!--修改图书-->
+    <update id="updateBook">
+        update book set bookname=#{bookName},bookauthor=#{bookAuthor},bookprice=#{bookPrice} where bookid=#{bookID}
+    </update>
+
+    <!--查询单个图书 resultType:返回类型-->
+    <select id="findOneBookByPrimaryKey" resultType="Book">
+        select * from book where bookid=#{bookID}
+    </select>
+
+    <!--模糊查询-->
+    <!--<select id="likeSelect" parameterType="string" resultType="Book">
+        select * from book where bookName like concat('%',#{bookName},'%')
+    </select>-->
+   <!--不能防止sql注入-->
+   <!-- <select id="likeSelect" parameterType="string" resultType="Book">
+        select * from book where bookName like '%${value}%'
+    </select>-->
+    <select id="likeSelect" parameterType="string" resultType="Book">
+        select * from book where bookName like '%' #{value} '%'
+    </select>
+
+    <!--添加后返回Id-->
+    <insert id="insertBook">
+         insert into book(bookname,bookauthor,bookprice) values(#{bookName},#{bookAuthor},#{bookPrice})
+         <selectKey resultType="int" keyProperty="bookID">
+             select @@IDENTITY
+         </selectKey>
+    </insert>
+
+    <!--多条件查询Map-->
+    <select id="selectMultiConditionMap" resultType="Book">
+        select * from book where bookName like '%' #{bookName} '%' and bookprice>#{bookPrice}
+    </select>
+
+    <!--多条件查询索引号-->
+    <select id="selectMultiConditionIndex" resultType="Book">
+        select * from book where bookName like '%' #{0} '%' and bookprice>#{1}
+    </select>
+
+    <!--智能标签if-->
+    <select id="findByIf" resultType="Book">
+        select * from book
+        <where>
+            <if test="bookName!=null">
+                and bookName like '%' #{bookName} '%'
+            </if>
+            <if test="bookPrice!=null">
+                and bookPrice>#{bookPrice}
+            </if>
+        </where>
+    </select>
+
+    <!--智能标签choose-->
+    <select id="findByChoose" resultType="Book">
+        select * from book
+        <where>
+            <choose>
+                <when test="bookName!=null">
+                    and bookName like '%' #{bookName} '%'
+                </when>
+                <when test="bookPrice!=null">
+                    and bookPrice>#{bookPrice}
+                </when>
+                <otherwise>1=1</otherwise>
+            </choose>
+        </where>
+    </select>
+
+    <!--智能标签foreach array-->
+    <select id="findByForEachArray" resultType="Book">
+        select * from book
+        <where>
+            bookId in
+            <foreach collection="array" open="(" close=")" separator="," item="myid">
+                #{myid}
+            </foreach>
+        </where>
+    </select>
+
+    <!--智能标签foreach list integer-->
+    <select id="findByForEachList" resultType="Book">
+        select * from book
+        <where>
+            bookId in
+            <foreach collection="list" open="(" close=")" separator="," item="myid">
+                #{myid}
+            </foreach>
+        </where>
+    </select>
+
+
+    <!--智能标签foreach list Book-->
+    <select id="findByForEachListBook" resultType="Book">
+        select * from book
+        <where>
+            bookId in
+            <foreach collection="list" open="(" close=")" separator="," item="book">
+                #{book.bookID}
+            </foreach>
+        </where>
+    </select>
+
+</mapper>

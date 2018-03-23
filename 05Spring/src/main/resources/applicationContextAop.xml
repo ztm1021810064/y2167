@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+     <bean id="HelloDao" class="cn.aop.dao.impl.HelloDaoImpl">
+     </bean>
+
+    <bean id="HelloService" class="cn.aop.service.impl.HelloServiceImpl">
+        <property name="dao" ref="HelloDao"></property>
+    </bean>
+
+    <bean id="beferActive" class="cn.aop.aop.BeforeActive">
+    </bean>
+
+    <bean id="afterActive" class="cn.aop.aop.AfterActive">
+    </bean>
+    <aop:config>
+        <aop:pointcut id="myPoint" expression="execution(* *..service.impl.*.*(..))"></aop:pointcut>
+        <aop:advisor advice-ref="beferActive" pointcut-ref="myPoint"></aop:advisor>
+        <aop:advisor advice-ref="afterActive" pointcut-ref="myPoint"></aop:advisor>
+    </aop:config>
+</beans>

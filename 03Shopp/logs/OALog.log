@@ -1,0 +1,12 @@
+2018-02-27 13:27:08.012 DEBUG [main]cn.dao.UserDao.login.debug:145 -==>  Preparing: SELECT * FROM `smbms_user` WHERE userName=? AND userPassword=? 
+2018-02-27 13:27:08.083 DEBUG [main]cn.dao.UserDao.login.debug:145 -==> Parameters: ztm(String), 123(String)
+2018-02-27 13:27:08.306 DEBUG [main]cn.dao.UserDao.login.debug:145 -<==      Total: 1
+2018-02-27 13:34:07.357 DEBUG [main]cn.dao.UserDao.login.debug:145 -==>  Preparing: SELECT * FROM `smbms_user` WHERE userName=? AND userPassword=? 
+2018-02-27 13:34:07.426 DEBUG [main]cn.dao.UserDao.login.debug:145 -==> Parameters: ztm(String), 123(String)
+2018-02-27 13:34:07.565 DEBUG [main]cn.dao.UserDao.login.debug:145 -<==      Total: 1
+2018-02-27 13:35:21.083 DEBUG [main]cn.dao.UserDao.login.debug:145 -==>  Preparing: SELECT count(*) AS num FROM `smbms_user` WHERE userName=? AND userPassword=? 
+2018-02-27 13:35:21.219 DEBUG [main]cn.dao.UserDao.login.debug:145 -==> Parameters: ztm(String), 123(String)
+2018-02-27 13:35:21.503 DEBUG [main]cn.dao.UserDao.login.debug:145 -<==      Total: 1
+2018-02-27 13:37:32.382 DEBUG [main]cn.dao.UserDao.login.debug:145 -==>  Preparing: SELECT count(*) AS num FROM `smbms_user` WHERE userName=? AND userPassword=? 
+2018-02-27 13:37:32.495 DEBUG [main]cn.dao.UserDao.login.debug:145 -==> Parameters: ztm(String), 111(String)
+2018-02-27 13:37:32.540 DEBUG [main]cn.dao.UserDao.login.debug:145 -<==      Total: 1

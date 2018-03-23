@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!--<bean id="car" class="cn.demo.Car">-->
+        <!--<property name="color" value="黄色"></property>-->
+        <!--<property name="type" value="OFO"></property>-->
+    <!--</bean>-->
+
+
+    <!--<bean id="stu" class="cn.demo.Stu" p:name="柴光亚" p:age="21" p:car-ref="car"></bean>-->
+
+    <!--<bean id="stu" class="cn.demo.Stu">-->
+        <!--<constructor-arg name="name" value="柴光亚"></constructor-arg>-->
+        <!--<constructor-arg index="1" value="21"></constructor-arg>-->
+    <!--</bean>-->
+
+    <bean id="collection" class="cn.demo.MyCollection">
+        <property name="array">
+            <array>
+                <value>足球</value>
+                <value>篮球</value>
+            </array>
+        </property>
+        <property name="list">
+            <list>
+                <value>李小龙</value>
+                <value>成龙</value>
+            </list>
+        </property>
+
+        <property name="map">
+            <map>
+                <entry key="S1">
+                    <value>李老师</value>
+                </entry>
+                <entry key="S2">
+                    <value>迟老师</value>
+                </entry>
+                <entry key="S3">
+                    <value>原老师</value>
+                </entry>
+            </map>
+        </property>
+
+        <property name="set">
+            <set>
+            <value>C#</value>
+            <value>Java</value>
+            </set>
+        </property>
+
+        <property name="properties">
+            <props>
+                <prop key="1">s1</prop>
+                <prop key="2">s2</prop>
+                <prop key="3">y3</prop>
+            </props>
+        </property>
+    </bean>
+</beans>

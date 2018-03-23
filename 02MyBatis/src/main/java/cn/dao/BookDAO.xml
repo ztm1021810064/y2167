@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.dao.BookDAO">
+    <cache eviction="FIFO" flushInterval="60000" size="512" readOnly="true"/>
+
+    <select id="selectBook" resultType="Book">
+        SELECT * FROM  book WHERE  bookID=#{bookID}
+    </select>
+    <!--index集合方法-->
+    <select id="selectMultiConditionIndex" resultType="Book">
+        select * from book where bookName like '%' #{0} '%' and bookPrice > #{1}
+    </select>
+    <!--Map集合方法-->
+    <select id="selectMultiConditionMap" resultType="Book">
+        SELECT * FROM book WHERE  bookName LIKE  '%' #{bookName} '%' AND  bookPrice>#{bookPrice}
+    </select>
+    <!--智能if标签-->
+    <select id="findByIf" resultType="Book">
+        SELECT * FROM book
+        <where>
+            <if test="bookName!=null">
+                AND bookName LIKE '%' #{bookName} '%'
+            </if>
+            <if test="bookPrice!=null">
+                AND bookPrice >#{bookPrice}
+            </if>
+        </where>
+    </select>
+
+    <!--&lt;!&ndash;智能标签forEach list Book&ndash;&gt;-->
+    <!--<select id="findByForEachArray" resultType="Book">-->
+        <!--SELECT * FROM book-->
+        <!--<where>-->
+            <!--bookID IN-->
+            <!--<foreach collection="array" open="(" close=")" separator="," item="myid">-->
+                <!--#{myid}-->
+            <!--</foreach>-->
+        <!--</where>-->
+    <!--</select>-->
+
+    <select id="findByForEachListBook" resultType="Book">
+        SELECT * FROM  book
+        <where>
+            bookID IN
+            <foreach collection="list" open="(" close=")" separator="," item="book">
+                #{book.bookID}
+            </foreach>
+        </where>
+    </select>
+</mapper>

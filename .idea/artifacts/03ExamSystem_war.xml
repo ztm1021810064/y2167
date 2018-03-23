@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="03ExamSystem:war">
+    <output-path>$PROJECT_DIR$/03ExamSystem/target</output-path>
+    <root id="archive" name="02WDK-BigData-Engine-Exam-System-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="03ExamSystem:war exploded" />
+    </root>
+  </artifact>
+</component>

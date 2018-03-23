@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+ <!--自动代理器-->
+    <!--<bean id="someService" class="cn.dome02.SomeServiceImpl"></bean>-->
+
+    <!--<bean id="beforeAdvice" class="cn.dome02.BeforeAdvice"></bean>-->
+
+    <!--<bean id="advisor" class="org.springframework.aop.support.RegexpMethodPointcutAdvisor">-->
+        <!--<property name="advice" ref="beforeAdvice"></property>-->
+        <!--<property name="pattern" value=".*e.*"></property>-->
+    <!--</bean>-->
+
+    <!--<bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"></bean>-->
+    <!--名称自动代理-->
+    <bean id="someService" class="cn.dome02.SomeServiceImpl"></bean>
+
+    <bean id="beforeAdvice" class="cn.dome02.BeforeAdvice"></bean>
+
+    <bean id="advisor" class="org.springframework.aop.support.RegexpMethodPointcutAdvisor">
+        <property name="advice" ref="beforeAdvice"></property>
+        <property name="pattern" value=".*e.*"></property>
+    </bean>
+
+    <bean class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+        <property name="beanNames" value="someService"></property>
+        <property name="interceptorNames" value="advisor"></property>
+    </bean>
+</beans>

@@ -1,0 +1,4 @@
+2018-03-12 10:56:39.962 DEBUG [main]cn.dao.BookDAO.getObject:62 -Cache Hit Ratio [cn.dao.BookDAO]: 0.0
+2018-03-12 10:56:46.741 DEBUG [main]cn.dao.BookDAO.selectMultiConditionIndex.debug:145 -==>  Preparing: select * from book where bookName like '%' ? '%' and bookPrice > ? 
+2018-03-12 10:56:46.838 DEBUG [main]cn.dao.BookDAO.selectMultiConditionIndex.debug:145 -==> Parameters: 铁(String), 210(Integer)
+2018-03-12 10:56:48.429 DEBUG [main]cn.dao.BookDAO.selectMultiConditionIndex.debug:145 -<==      Total: 1

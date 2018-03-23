@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="dataSource"></property>
+    </bean>
+
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
+        <property name="url" value="jdbc:mysql:///y2167"></property>
+        <property name="username" value="root"></property>
+        <property name="password" value=""></property>
+    </bean>
+
+    <bean id="accountDao" class="cn.dome06.dao.AccountDaoImpl">
+        <property name="jdbcTemplate" ref="jdbcTemplate"></property>
+    </bean>
+
+    <bean id="stockDao" class="cn.dome06.dao.StockDaoImpl">
+        <property name="jdbcTemplate" ref="jdbcTemplate"></property>
+    </bean>
+
+
+    <bean id="cgyService" class="cn.dome06.service.cgyServiceImpl">
+        <property name="aDao" ref="accountDao"></property>
+        <property name="sDao" ref="stockDao"></property>
+    </bean>
+
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"></property>
+    </bean>
+   <!--第二种 事务注解失败-->
+    <tx:annotation-driven transaction-manager="transactionManager"></tx:annotation-driven>
+   <!--第一种配置TransactionProxyFactoryBean  事务代理工厂bean-->
+    <!--<bean class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">-->
+        <!--<property name="transactionManager" ref="transactionManager"></property>-->
+        <!--<property name="target" ref="cgyService"></property>-->
+        <!--<property name="transactionAttributes">-->
+            <!--<props>-->
+                <!--<prop key="cgy">ISOLATION_DEFAULT,PROPAGATION_REQUIRED,-cgyException</prop>-->
+            <!--</props>-->
+        <!--</property>-->
+    <!--</bean>-->
+    <!--第三种 使用Aspectj aop 配置-->
+    <tx:advice id="myadvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="cgyService" isolation="DEFAULT" propagation="REQUIRED" rollback-for="cgyException"/>
+        </tx:attributes>
+    </tx:advice>
+
+    <aop:config>
+        <aop:pointcut id="myPoint" expression="execution(* *..dome06.service.*.*(..))"></aop:pointcut>
+        <aop:advisor advice-ref="myadvice" pointcut-ref="myPoint"></aop:advisor>
+    </aop:config>
+</beans>

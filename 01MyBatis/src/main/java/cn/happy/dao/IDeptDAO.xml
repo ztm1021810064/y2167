@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--命名空间-->
+<mapper namespace="cn.happy.dao.IDeptDAO">
+     <resultMap id="deptMapper" type="Dept">
+         <id column="deptNo" property="deptNo"></id>
+         <result column="deptName" property="deptName"></result>
+         <!--集合中每一个元素的类型-->
+         <collection property="emps" ofType="Emp">
+             <id column="empNo" property="empNo"></id>
+             <result column="empName" property="empName"></result>
+         </collection>
+     </resultMap>
+   <!--多条SQL方案-->
+    <resultMap id="deptMapperMulti" type="Dept">
+        <id column="deptNo" property="deptNo"></id>
+        <result column="deptName" property="deptName"></result>
+        <!--集合中每一个元素的类型-->
+        <collection property="emps" ofType="Emp" select="selectEmpsByNo" column="deptNo">
+        </collection>
+    </resultMap>
+
+    <!--单条SQL的方案 查询出部门和员工-->
+    <select id="getEmpsByDeptNo" resultMap="deptMapper">
+        select * from dept,emp
+        where dept.deptNo=emp.deptNo
+        and dept.deptNo=#{deptNo}
+    </select>
+
+     <select id="selectEmpsByNo" resultType="Emp">
+         select * from emp
+         where deptno=#{deptNo}
+     </select>
+    <!--多条SQL的方案 查询出部门和员工-->
+    <select id="getEmpsByDeptNoMultiSQL" resultMap="deptMapperMulti">
+        select * from dept
+        where deptNo=#{deptNo}
+    </select>
+
+
+</mapper>
